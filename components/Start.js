@@ -1,9 +1,11 @@
-import { StyleSheet, View, Text, Button, TextInput, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import Icon from '../assets/icon.svg'; // Import the SVG icon
+import Icon from '../assets/icon.svg';
 
 const Start = ({ navigation }) => {
     const [name, setName] = useState('');
+    const [bgColor, setBgColor] = useState('#090C08');
+    const colors = ['#090C08', '#474056', '#8A95A5', '#B9CBE5'];
 
     return (
         <ImageBackground source={require('../assets/Background-Image.png')} style={[styles.container, styles.background]}>
@@ -20,7 +22,23 @@ const Start = ({ navigation }) => {
                             placeholderTextColor='#757083'
                         />
                     </View>
-                    <Button title='Go to Chat' onPress={() => navigation.navigate('Chat', { name: name })} />
+                    <Text style={styles.chooseBackgroundColorText}>Choose Background Color:</Text>
+                    <View style={styles.colorButtonsContainer}>
+                    {colors.map((color) => (
+                        <TouchableOpacity
+                            key={color}
+                            style={[
+                                styles.chooseBackgroundColorButton,
+                                { backgroundColor: color },
+                                bgColor === color && styles.selectedColorButton
+                            ]}
+                            onPress={() => setBgColor(color)}
+                        />
+                    ))}
+                    </View>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Chat', { name: name, bgColor: bgColor })}>
+                        <Text style={styles.chatButtonText}>Start Chatting</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </ImageBackground>
@@ -45,10 +63,10 @@ const styles = StyleSheet.create({
     },
     box: {
         width: '88%',
-        height: '44%',
+        height: '34%',
         backgroundColor: '#ffffff',
         position: 'absolute',
-        top: '40%',
+        top: '55%',
     },
     inputContainer: {
         flexDirection: 'row',
@@ -56,10 +74,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#757083',
         padding: 10,
-        marginTop: 15,
-        marginBottom: 15,
-        marginLeft: 20,
-        marginRight: 20,
+        marginVertical: 15,
+        marginHorizontal: 20,
     },
     icon: {
         marginRight: 10,
@@ -67,6 +83,43 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         fontSize: 16,
+    },
+    chooseBackgroundColorText: {
+        fontSize: 16,
+        fontWeight: '300',
+        color: '#757083',
+        opacity: 1,
+        marginVertical: 15,
+        marginHorizontal: 20,
+    },
+    colorButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginBottom: 20,
+    },
+    chooseBackgroundColorButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        marginHorizontal: 8,
+        borderWidth: 2,
+        borderColor: 'transparent',
+    },
+    selectedColorButton: {
+        borderColor: '#757083',
+    },
+    button: {
+        backgroundColor: '#757083',
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 20,
+        marginHorizontal: 20,
+    },
+    chatButtonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        textAlign: 'center',
     },
 });
 
