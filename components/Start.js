@@ -4,8 +4,8 @@ import Icon from '../assets/icon.svg';
 
 const Start = ({ navigation }) => {
     const [name, setName] = useState('');
-    const [bgColor, setBgColor] = useState('#090C08');
-    const colors = ['#090C08', '#474056', '#8A95A5', '#B9CBE5'];
+        [bgColor, setBgColor] = useState('#090C08');
+        colors = ['#090C08', '#474056', '#8A95A5', '#B9CBE5'];
 
     return (
         <ImageBackground source={require('../assets/Background-Image.png')} style={[styles.container, styles.background]}>
