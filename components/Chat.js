@@ -36,6 +36,7 @@ const Chat = ({ route, navigation }) => {
                 onSend={messages => onSend(messages)}
                 user={{
                     _id: 1,
+                    name: 'name'
                 }}
             />
             { Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null }
@@ -46,8 +47,7 @@ const Chat = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        
     }
 });
 
